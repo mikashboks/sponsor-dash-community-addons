@@ -1,0 +1,301 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* generic_location
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-13 15:09+0000\n"
+"PO-Revision-Date: 2019-09-13 15:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: generic_location
+#: model:res.groups,comment:generic_location.group_generic_location_user
+msgid "Access generic locations"
+msgstr "Доступ к локации"
+
+#. module: generic_location
+#: model:res.groups,comment:generic_location.group_generic_location_user_implicit
+msgid ""
+"Access generic locations (no access to menu, access only to locations he is "
+"subscribed to, and theirs sublocations)\n"
+"        "
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_needaction
+msgid "Action Needed"
+msgstr "Требует внимания"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__active
+msgid "Active"
+msgstr "Активно"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__child_all_ids
+msgid "All Childs"
+msgstr ""
+
+#. module: generic_location
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_search_view
+msgid "Archived"
+msgstr "Архивировано"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__child_all_count
+msgid "Child All Count"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__child_count
+msgid "Child Count"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__create_uid
+msgid "Created by"
+msgstr "Создано"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__create_date
+msgid "Created on"
+msgstr "Создан"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__description
+msgid "Description"
+msgstr "Описание"
+
+#. module: generic_location
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_form_view
+msgid "Description..."
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__display_name
+msgid "Display Name"
+msgstr "Отображаемое Имя"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_follower_ids
+msgid "Followers"
+msgstr "Подписчики"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Подписчики (Каналы)"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Подписчики (Партнеры)"
+
+#. module: generic_location
+#: model:ir.ui.menu,name:generic_location.menu_generic_location
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_form_view
+msgid "Generic Location"
+msgstr "Локация"
+
+#. module: generic_location
+#: model:res.groups,name:generic_location.group_generic_location_manager
+msgid "Generic location manager"
+msgstr "Менеджер локаций"
+
+#. module: generic_location
+#: model:res.groups,name:generic_location.group_generic_location_user
+msgid "Generic location user"
+msgstr "Пользователь локаций"
+
+#. module: generic_location
+#: model:res.groups,name:generic_location.group_generic_location_user_implicit
+msgid "Generic location user (implicit)"
+msgstr "Пользователь локаций (implicit)"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__id
+msgid "ID"
+msgstr "Номер"
+
+#. module: generic_location
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_needaction
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Если отмечено - новые сообщения требуют Вашего внимания."
+
+#. module: generic_location
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__image_1920
+msgid "Image"
+msgstr "Изображение"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__image_1024
+msgid "Image 1024"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__image_128
+msgid "Image 128"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__image_256
+msgid "Image 256"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__image_512
+msgid "Image 512"
+msgstr ""
+
+#. module: generic_location
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_form_view
+msgid "Info"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_is_follower
+msgid "Is Follower"
+msgstr "Подписчик"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location____last_update
+msgid "Last Modified on"
+msgstr "Последнее изменение"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__write_uid
+msgid "Last Updated by"
+msgstr "Последний раз обновил"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__write_date
+msgid "Last Updated on"
+msgstr "Последнее обновление"
+
+#. module: generic_location
+#: model:ir.actions.act_window,name:generic_location.generic_location_action
+#: model:ir.model,name:generic_location.model_generic_location
+#: model:ir.ui.menu,name:generic_location.archive_generic_location
+msgid "Location"
+msgstr "Локация"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: generic_location
+#: model:res.groups,comment:generic_location.group_generic_location_manager
+msgid "Manage generic locations"
+msgstr "Управляет настройкой локаций"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_ids
+msgid "Messages"
+msgstr "Сообщения"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__name
+msgid "Name"
+msgstr "Название"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Количество действий"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Количество сообщений, требующих внимания"
+
+#. module: generic_location
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,help:generic_location.field_generic_location__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Количество непрочитанных сообщений"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__parent_id
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_form_view
+msgid "Parent Location"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__parent_path
+msgid "Parent Path"
+msgstr ""
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__parent_ids
+msgid "Parents"
+msgstr ""
+
+#. module: generic_location
+#: model_terms:ir.ui.view,arch_db:generic_location.generic_location_form_view
+msgid "Sublocation"
+msgstr ""
+
+#. module: generic_location
+#: code:addons/generic_location/models/generic_location.py:0
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__child_ids
+#, python-format
+msgid "Sublocations"
+msgstr "Сублокации"
+
+#. module: generic_location
+#: model:ir.model.constraint,message:generic_location.constraint_generic_location_name_description_check
+msgid "The title of the Location should not be the description"
+msgstr "Название и описание локации не должны совпадать"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_unread
+msgid "Unread Messages"
+msgstr "Непрочитанные Сообщения"
+
+#. module: generic_location
+#: model:ir.model.fields,field_description:generic_location.field_generic_location__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Счетчик непрочитанных сообщений"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Если отмечено, новые сообщения будут требовать вашего внимания."
+
+#~ msgid "Medium-sized image"
+#~ msgstr "Изображение средних размеров"
+
+#~ msgid "Small-sized image"
+#~ msgstr "Маленькое изображение"

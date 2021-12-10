@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record model="ir.ui.view" id="generic_location_form_view">
+        <field name="name">generic.location.form</field>
+        <field name="model">generic.location</field>
+        <field name="arch" type="xml">
+            <form string="Generic Location">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_button_show_sublocations" 
+                                class="oe_stat_button" 
+                                type="object"
+                                icon="fa-tasks">
+                            <field string="Sublocation" 
+                                    name="child_count" 
+                                    widget="statinfo"/>
+                        </button>
+                        <button name="toggle_active" 
+                                type="object"
+                                class="oe_stat_button" 
+                                icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <field name="image_1920" widget='image' class="oe_avatar" options='{"preview_image": "image_128"}'/>
+                    <div class="oe_title" name="location_name">
+                        <h1>
+                            <field name="name"/>                          
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="parent_id" placeholder="Parent Location"/>
+                    </group>
+                    <notebook>
+                        <page string="Info" name="page_info">
+                            <group>
+                            </group>
+                            <field name="description" placeholder="Description..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    
+    <!-- list view for location -->
+    <record model="ir.ui.view" id="generic_location_tree_view">
+        <field name="name">generic.location.tree</field>
+        <field name="model">generic.location</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- search views location -->
+    <record model="ir.ui.view" id="generic_location_search_view">
+        <field name="name">generic.location.search</field>
+        <field name="model">generic.location</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <separator/>
+                <filter name="filter_archived"
+                        string="Archived"
+                        domain="[('active', '=', False)]"/>
+                <field name="parent_id"/>
+            </search>
+        </field>
+     </record>
+
+    <record id="generic_location_action" model="ir.actions.act_window">
+        <field name="name">Location</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">generic.location</field>
+    </record>
+    <record id="generic_location_action_view_tree"
+            model="ir.actions.act_window.view">
+        <field eval="5" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id"  ref="generic_location_tree_view"/>
+        <field name="act_window_id" ref="generic_location_action"/>
+    </record>
+    <record id="generic_location_action_view_from"
+            model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id"  ref="generic_location_form_view"/>
+        <field name="act_window_id" ref="generic_location_action"/>
+    </record>
+
+
+    <menuitem id="menu_generic_location"
+              name="Generic Location"
+              groups="generic_location.group_generic_location_user"
+              web_icon="generic_location,static/description/menu.png"/>
+    <menuitem id="archive_generic_location"
+              name="Location"
+              parent="menu_generic_location"
+              sequence="10"
+              action="generic_location_action"/>
+</odoo>
