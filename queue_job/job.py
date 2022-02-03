@@ -4,7 +4,6 @@
 import functools
 import hashlib
 import inspect
-import json
 import logging
 import os
 import sys
@@ -507,34 +506,19 @@ class Job(object):
         try:
             self.result = self.func(*tuple(self.args), **self.kwargs)
         except RetryableJobError as err:
-            err_data = {
-                'id': self._uuid,
-                'self': self,
-                'err': err,
-                'ignore_retry': err.ignore_retry,
-                'max_retries': self.max_retries,
-                'retry': self.retry
-            }
-            _logger.error(json.dumps(err_data, default=str))
             if err.ignore_retry:
-                _logger.error("job_queue hack we are in ignore_retry")
                 self.retry -= 1
                 raise
             elif not self.max_retries:  # infinite retries
-                _logger.error("job_queue hack we are in not max_retry")
                 raise
             elif self.retry >= self.max_retries:
-                _logger.error("job_queue hack we are in retry > max_retry 1")
                 type_, value, traceback = sys.exc_info()
-
-                _logger.error("job_queue hack we are in retry > max_retry 2")
                 # change the exception type but keep the original
                 # traceback and message:
                 # http://blog.ianbicking.org/2007/09/12/re-raising-exceptions/
                 new_exc = FailedJobError(
                     "Max. retries (%d) reached: %s" % (self.max_retries, value or type_)
                 )
-                _logger.error("job_queue hack we are in ignore_retry 3")
                 raise new_exc from err
             raise
         return self.result
