@@ -97,16 +97,26 @@ class RunJobController(http.Controller):
             _logger.debug("%s postponed", job)
 
         except (FailedJobError, Exception):
+            _logger.error("job_queue hack we are in FailedJobError, Exception 1")
             buff = StringIO()
+            _logger.error("job_queue hack we are in FailedJobError, Exception 2")
             traceback.print_exc(file=buff)
+            _logger.error("job_queue hack we are in FailedJobError, Exception 3")
             _logger.error(buff.getvalue())
+            _logger.error("job_queue hack we are in FailedJobError, Exception 4")
             job.env.clear()
+            _logger.error("job_queue hack we are in FailedJobError, Exception 5")
             with odoo.api.Environment.manage():
                 with odoo.registry(job.env.cr.dbname).cursor() as new_cr:
+                    _logger.error("job_queue hack we are in FailedJobError, Exception 6")
                     job.env = job.env(cr=new_cr)
+                    _logger.error("job_queue hack we are in FailedJobError, Exception 7")
                     job.set_failed(exc_info=buff.getvalue())
+                    _logger.error("job_queue hack we are in FailedJobError, Exception 8")
                     job.store()
+                    _logger.error("job_queue hack we are in FailedJobError, Exception 9")
                     new_cr.commit()
+                    _logger.error("job_queue hack we are in FailedJobError, Exception 10")
             raise
 
         return ""
