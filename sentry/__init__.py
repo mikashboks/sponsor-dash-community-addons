@@ -78,7 +78,7 @@ def initialize_raven(config, client_cls=None):
     raven.conf.setup_logging(handler)
     wsgi_server.application = Sentry(wsgi_server.application, client=client)
 
-    client.captureMessage("Starting Odoo Server")
+    # client.captureMessage("Starting Odoo Server")
     return client
 
 
