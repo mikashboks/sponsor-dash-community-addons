@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="xls_report" model="ir.ui.view">
+            <field name="name">Reporting Wizard</field>
+            <field name="model">sale.excel</field>
+            <field name="arch" type="xml">
+                <form string="Sales Details">
+                    <group>
+                        <field name="file_name" invisible="1"/>
+                        <field name="excel_file" filename="file_name"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="xls_action" model="ir.actions.act_window">
+            <field name="name">Report.Actions</field>
+            <field name="res_model">sale.excel</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="xls_report"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
