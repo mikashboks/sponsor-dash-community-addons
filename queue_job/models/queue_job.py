@@ -281,23 +281,37 @@ class QueueJob(models.Model):
     def autovacuum(self):
         """Delete all jobs done based on the removal interval defined on the
            channel
-
         Called from a cron.
         """
+        # for channel in self.env["queue.job.channel"].search([]):
+        #     deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
+        #     while True:
+        #         jobs = self.search(
+        #             [
+        #                 "|",
+        #                 ("date_done", "<=", deadline),
+        #                 ("date_cancelled", "<=", deadline),
+        #                 ("channel", "=", channel.complete_name),
+        #             ],
+        #             limit=1000,
+        #         )
+        #         if jobs:
+        #             jobs.unlink()
+        #         else:
+        #            break
         for channel in self.env["queue.job.channel"].search([]):
             deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
-            while True:
-                jobs = self.search(
-                    [
-                        ("date_done", "<=", deadline),
-                        ("channel", "=", channel.complete_name),
-                    ],
-                    limit=1000,
-                )
-                if jobs:
-                    jobs.unlink()
-                else:
-                    break
+            jobs = self.search(
+                [
+                    "|",
+                    ("date_done", "<=", deadline),
+                    ("date_cancelled", "<=", deadline),
+                    ("channel", "=", channel.complete_name),
+                ],
+                limit=100,
+            )
+            if jobs:
+                jobs.unlink()
         return True
 
     def requeue_stuck_jobs(self, enqueued_delta=5, started_delta=0):
