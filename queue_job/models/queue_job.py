@@ -308,7 +308,7 @@ class QueueJob(models.Model):
                     ("date_cancelled", "<=", deadline),
                     ("channel", "=", channel.complete_name),
                 ],
-                limit=100,
+                limit=1000,
             )
             if jobs:
                 jobs.unlink()
