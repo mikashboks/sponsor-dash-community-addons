@@ -283,35 +283,41 @@ class QueueJob(models.Model):
            channel
         Called from a cron.
         """
-        # for channel in self.env["queue.job.channel"].search([]):
-        #     deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
-        #     while True:
-        #         jobs = self.search(
-        #             [
-        #                 "|",
-        #                 ("date_done", "<=", deadline),
-        #                 ("date_cancelled", "<=", deadline),
-        #                 ("channel", "=", channel.complete_name),
-        #             ],
-        #             limit=1000,
-        #         )
-        #         if jobs:
-        #             jobs.unlink()
-        #         else:
-        #            break
         for channel in self.env["queue.job.channel"].search([]):
             deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
-            jobs = self.search(
-                [
-                    "|",
-                    ("date_done", "<=", deadline),
-                    ("date_cancelled", "<=", deadline),
-                    ("channel", "=", channel.complete_name),
-                ],
-                limit=1000,
-            )
-            if jobs:
-                jobs.unlink()
+            while True:
+                jobs = self.search(
+                    [
+                        "|",
+                        ("date_done", "<=", deadline),
+                        ("date_cancelled", "<=", deadline),
+                        ("channel", "=", channel.complete_name),
+                    ],
+                    limit=1000,
+                )
+                if jobs:
+                    jobs.unlink()
+                    try:
+                        self.env.cr.commit()
+                        _logger.info("Deleted another 1000 jobs")
+                    except Exception as e:
+                        _logger.exception("Failed to commit jobs.unlink()", e)
+                        break
+                else:
+                   break
+        # for channel in self.env["queue.job.channel"].search([]):
+        #     deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
+        #     jobs = self.search(
+        #         [
+        #             "|",
+        #             ("date_done", "<=", deadline),
+        #             ("date_cancelled", "<=", deadline),
+        #             ("channel", "=", channel.complete_name),
+        #         ],
+        #         limit=1000,
+        #     )
+        #     if jobs:
+        #         jobs.unlink()
         return True
 
     def requeue_stuck_jobs(self, enqueued_delta=5, started_delta=0):
