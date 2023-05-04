@@ -278,33 +278,41 @@ class QueueJob(models.Model):
         """
         return [("state", "=", "failed")]
 
+
     def autovacuum(self):
         """Delete all jobs done based on the removal interval defined on the
            channel
         Called from a cron.
         """
+
+        total_deleted_jobs = 0
+        max_deleted_jobs = 10000
+
         for channel in self.env["queue.job.channel"].search([]):
             deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
             while True:
                 jobs = self.search(
                     [
-                        "|",
-                        ("date_done", "<=", deadline),
-                        ("date_cancelled", "<=", deadline),
+                        ("date_created", "<=", deadline),
                         ("channel", "=", channel.complete_name),
                     ],
                     limit=1000,
                 )
                 if jobs:
                     jobs.unlink()
+                    total_deleted_jobs += len(jobs)
                     try:
                         self.env.cr.commit()
-                        _logger.info("Deleted another 1000 jobs")
+                        _logger.info("Deleted another %s jobs", len(jobs))
                     except Exception as e:
                         _logger.exception("Failed to commit jobs.unlink()", e)
                         break
                 else:
-                   break
+                    break
+
+                # Stop running after deleting 10,000 jobs
+                if total_deleted_jobs >= max_deleted_jobs:
+                    break
         # for channel in self.env["queue.job.channel"].search([]):
         #     deadline = datetime.now() - timedelta(days=int(channel.removal_interval))
         #     jobs = self.search(
@@ -319,6 +327,7 @@ class QueueJob(models.Model):
         #     if jobs:
         #         jobs.unlink()
         return True
+
 
     def requeue_stuck_jobs(self, enqueued_delta=5, started_delta=0):
         """Fix jobs that are in a bad states
