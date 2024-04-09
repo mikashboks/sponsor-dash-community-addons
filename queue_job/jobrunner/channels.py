@@ -1010,7 +1010,7 @@ class ChannelManager(object):
             channel = self._root_channel
         job = self._jobs_by_uuid.get(uuid)
         if job:
-            # db_name is invariant
+            # key is invariant
             assert job.db_name == db_name
             # date_created is invariant
             assert job.date_created == date_created
