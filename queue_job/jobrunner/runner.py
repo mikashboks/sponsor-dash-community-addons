@@ -345,6 +345,7 @@ class QueueJobRunner(object):
         user=None,
         password=None,
         channel_config_string=None,
+        unknown_channels_ignore=False,
     ):
         self.scheme = scheme
         self.host = host
@@ -354,7 +355,7 @@ class QueueJobRunner(object):
         self.channel_manager = ChannelManager()
         if channel_config_string is None:
             channel_config_string = _channels()
-        self.channel_manager.simple_configure(channel_config_string)
+        self.channel_manager.simple_configure(channel_config_string, unknown_channels_ignore)
         self.db_by_name = {}
         self._stop = False
         self._stop_pipe = os.pipe()
@@ -380,12 +381,16 @@ class QueueJobRunner(object):
         password = os.environ.get(
             "ODOO_QUEUE_JOB_HTTP_AUTH_PASSWORD"
         ) or queue_job_config.get("http_auth_password")
+        unknown_channels_ignore = os.environ.get(
+            "ODOO_QUEUE_JOB_IGNORE_UNKNOWN"
+        ) or queue_job_config.get("job_ignore_unknown")
         runner = cls(
             scheme=scheme or "http",
             host=host or "localhost",
             port=port or 8069,
             user=user,
             password=password,
+            unknown_channels_ignore=unknown_channels_ignore,
         )
         return runner
 

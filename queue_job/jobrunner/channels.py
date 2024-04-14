@@ -900,7 +900,7 @@ class ChannelManager(object):
             res.append(config)
         return res
 
-    def simple_configure(self, config_string):
+    def simple_configure(self, config_string, ignore_unknown_channels=False):
         """Configure the channel manager from a simple configuration string
 
         >>> cm = ChannelManager()
@@ -924,6 +924,7 @@ class ChannelManager(object):
         >>> cm.get_channel_by_name('seq').sequential
         True
         """
+        self._ignore_unknown_channels = ignore_unknown_channels
         for config in ChannelManager.parse_simple_config(config_string):
             self.get_channel_from_config(config)
 
@@ -1004,10 +1005,16 @@ class ChannelManager(object):
         try:
             channel = self.get_channel_by_name(channel_name)
         except ChannelNotFound:
-            _logger.warning(
-                "unknown channel %s, using root channel for job %s", channel_name, uuid
-            )
-            channel = self._root_channel
+            if self._ignore_unknown_channels:
+                _logger.warning(
+                    "ignoring job %s, channel %s does not want it", uuid, channel_name
+                )
+                return False
+            else:
+                _logger.warning(
+                    "unknown channel %s, using root channel for job %s", channel_name, uuid
+                )
+                channel = self._root_channel
         job = self._jobs_by_uuid.get(uuid)
         if job:
             # key is invariant
