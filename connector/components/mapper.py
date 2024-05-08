@@ -694,9 +694,9 @@ class Mapper(AbstractComponent):
         try:
             child_records = map_record.source[from_attr]
         except KeyError as e:
-            _logger.error("Field %s not found in record %s", from_attr, json.dump({
-                "record": json.dump(map_record.source, default=str),
-                "map_record": json.dump(map_record, default=str),
+            _logger.error("_map_child Field %s not found in record %s", from_attr, json.dump({
+                "record": json.dumps(map_record.source, default=str),
+                "map_record": json.dumps(map_record, default=str),
                 "from_attr": from_attr,
                 "to_attr": to_attr,
                 "model_name": model_name,
