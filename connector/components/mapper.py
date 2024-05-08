@@ -850,7 +850,7 @@ class Mapper(AbstractComponent):
                         map_record, from_attr, to_attr, model_name
                     )
                 except KeyError as e:
-                    _logger.error("Field from %s to %s not found in record %s", from_attr, to_attr, model_name)
+                    _logger.error("Field from %s to %s not found in record %s.", from_attr, to_attr, model_name)
                     continue
 
         return self.finalize(map_record, result)
