@@ -845,9 +845,13 @@ class Mapper(AbstractComponent):
 
         for from_attr, to_attr, model_name in self.children:
             if not fields or from_attr in fields:
-                result[to_attr] = self._map_child(
-                    map_record, from_attr, to_attr, model_name
-                )
+                try:
+                    result[to_attr] = self._map_child(
+                        map_record, from_attr, to_attr, model_name
+                    )
+                except KeyError as e:
+                    _logger.error("Field from %s to %s not found in record %s", from_attr, to_attr, model_name)
+                    continue
 
         return self.finalize(map_record, result)
 
