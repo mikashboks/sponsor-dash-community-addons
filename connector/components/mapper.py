@@ -12,6 +12,7 @@ external records into Odoo records and conversely.
 """
 
 import collections
+import json
 import logging
 from collections import namedtuple
 from contextlib import contextmanager
@@ -690,7 +691,18 @@ class Mapper(AbstractComponent):
     def _map_child(self, map_record, from_attr, to_attr, model_name):
         """ Convert items of the record as defined by children """
         assert self._map_child_usage is not None, "_map_child_usage required"
-        child_records = map_record.source[from_attr]
+        try:
+            child_records = map_record.source[from_attr]
+        except KeyError as e:
+            _logger.error("Field %s not found in record %s", from_attr, json.dump({
+                "record": json.dump(map_record.source, default=str),
+                "map_record": json.dump(map_record, default=str),
+                "from_attr": from_attr,
+                "to_attr": to_attr,
+                "model_name": model_name,
+                "name": self._name
+            }))
+            raise e
         mapper_child = self._get_map_child_component(model_name)
         items = mapper_child.get_items(
             child_records, map_record, to_attr, options=self.options
