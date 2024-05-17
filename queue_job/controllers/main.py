@@ -24,17 +24,21 @@ PG_RETRY = 5  # seconds
 class RunJobController(http.Controller):
     def _try_perform_job(self, env, job):
         """Try to perform the job."""
-        job.set_started()
-        job.store()
-        env.cr.commit()
-        _logger.debug("%s started", job)
+        try:
+            job.set_started()
+            job.store()
+            env.cr.commit()
+            _logger.debug("%s started", job)
 
-        job.perform()
-        job.set_done()
-        job.store()
-        env["base"].flush()
-        env.cr.commit()
-        _logger.debug("%s done", job)
+            job.perform()
+            job.set_done()
+            job.store()
+            env["base"].flush()
+            env.cr.commit()
+            _logger.debug("%s done", job)
+        except Exception:
+            env.cr.rollback()
+            raise
 
     @http.route("/queue_job/runjob", type="http", auth="none", save_session=False)
     def runjob(self, db, job_uuid, **kw):
